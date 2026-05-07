@@ -21,6 +21,15 @@ def main():
     df = pd.read_csv(RAW_DATA_PATH, names=column_names, header=None)
     df = df.drop(columns=['id'])
     df['diagnosis'] = df['diagnosis'].map({'M': 1, 'B': 0})
+    
+    # Eliminio caracteristicas muy correlacionadas 
+    cols_to_drop = [
+        'perimeter_mean', 'area_mean', 
+        'perimeter_se', 'area_se', 
+        'perimeter_worst', 'area_worst'
+    ]
+    df = df.drop(columns=cols_to_drop)
+
 
     # Separar Features (X) y Target (y)
     X = df.drop(columns=['diagnosis'])
