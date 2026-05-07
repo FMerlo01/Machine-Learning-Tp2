@@ -1,2 +1,0 @@
-processed quita columna id y setea el target a 0 o 1
-al separar usamos stratify. La relacion entre clases queda entonces igual en test que en train

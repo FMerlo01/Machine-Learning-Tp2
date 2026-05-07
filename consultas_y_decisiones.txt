@@ -1,0 +1,6 @@
+Processed quita columna id, setea el target a 0 o 1, y normaliza
+
+Al separar usamos stratify. La relacion entre clases queda entonces igual en test que en train
+
+Quitamos perimetro y area por la alta correlacion entre si y con radio.
+

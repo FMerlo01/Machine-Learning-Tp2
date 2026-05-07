@@ -24,9 +24,14 @@ def main():
     
     # Eliminio caracteristicas muy correlacionadas 
     cols_to_drop = [
+        # Limpieza 1: area y perimetro (muy correlacionados con el radio)
         'perimeter_mean', 'area_mean', 
         'perimeter_se', 'area_se', 
-        'perimeter_worst', 'area_worst'
+        'perimeter_worst', 'area_worst',
+        # Limpieza 2: Compactness y Concavity (muy correlados con concave points)
+        'compactness_mean', 'concavity_mean',
+        'compactness_se', 'concavity_se',
+        'compactness_worst', 'concavity_worst'
     ]
     df = df.drop(columns=cols_to_drop)
 
@@ -44,6 +49,7 @@ def main():
     test_df = pd.concat([X_test, y_test], axis=1)
 
     # Guardar como csv
+    os.makedirs("data/processed", exist_ok=True)
     train_df.to_csv(TRAIN_PATH, index=False)
     test_df.to_csv(TEST_PATH, index=False)
     print("✅ Dataset procesado, dividido (80/20) y guardado en data/processed/")
