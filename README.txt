@@ -23,7 +23,6 @@ PASOS DE EJECUCION
     Toda la ejecucion se realiza automatica y secuencialmente corriendo en terminal el script correspondiente a tu SO: "run_pipeline.bat" (Windows) o "run_pipeline.sh" (Linux)
     Se recomienda ingresar primero a un visual enviorment propio e instalar las dependencias del proyecto con "pip install -r requierements.txt"
 
-
     Preparacion y Limpieza:
     Se ejecuta 'python src/data/make_dataset.py'. Este paso realiza dos limpiezas criticas:
 
@@ -59,4 +58,4 @@ REQUISITOS
 
     Python 3.8 o superior.
 
-    Librerias: pandas, scikit-learn, matplotlib, seaborn.
+    Las librerias especificas se encuentras listadas en "requirements.txt"
