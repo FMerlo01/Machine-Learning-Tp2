@@ -17,7 +17,7 @@ python src/data/make_dataset.py
 (Generará train.csv y test.csv en data/processed/)
 
 2. Transformar los Datos
-Aplica escalado (StandardScaler) a las variables continuas. Es vital correr primero el entrenamiento para aprender los parámetros del escalador sin cometer data leakage.
+Aplica escalado (StandardScaler) a las variables continuas. Correr primero el entrenamiento para aprender los parámetros del escalador sin cometer data leakage.
 Comandos:
 
 python src/data/transform_data.py train.csv

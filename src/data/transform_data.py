@@ -25,6 +25,9 @@ def main():
     X = df.drop(columns=['diagnosis'])
     y = df['diagnosis']
 
+    # Cargar o crear el escalador según el archivo 
+    scaler = joblib.load(SCALER_PATH)
+
     # Lógica condicional según el archivo para evitar Data Leakage
     if filename == "train.csv":
         scaler = StandardScaler()
