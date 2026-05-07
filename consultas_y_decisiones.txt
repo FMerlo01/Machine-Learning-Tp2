@@ -2,5 +2,9 @@ Processed quita columna id, setea el target a 0 o 1, y normaliza
 
 Al separar usamos stratify. La relacion entre clases queda entonces igual en test que en train
 
-Quitamos perimetro y area por la alta correlacion entre si y con radio.
+Limpieza:
+Quitamos perimetro y area por la alta correlacion entre si y con radio, que era mas fuerte sobre el target
+Quitamos compactness y concavity por la alta correlacion entre si y con concave points, que era mas fuerte sobre el target
 
+Entrenamiento:
+Mirar train_models paso #3 para ver y ajustar los hiperparametros a los modelos

@@ -40,9 +40,6 @@ def plot_correlation_matrix():
     # Configuramos el tamaño del gráfico (lo hacemos grande porque son 30 variables)
     plt.figure(figsize=(20, 15))
     
-    # Generamos el heatmap con seaborn
-    # cmap="coolwarm" pone los positivos en rojo y negativos en azul
-    # annot=False porque 30x30 números no se van a leer bien
     sns.heatmap(corr_matrix, cmap="coolwarm", vmin=-1, vmax=1, center=0, 
                 square=True, linewidths=.5, cbar_kws={"shrink": .5})
     
