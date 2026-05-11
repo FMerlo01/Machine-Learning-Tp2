@@ -46,15 +46,35 @@ def run_training():
     results_detail = {}
 
     for name, model in models.items():
-        grid_search = GridSearchCV(model, param_grids[name], cv=5, scoring='accuracy', n_jobs=-1)
+        scoring = {
+            "accuracy": "accuracy",
+            "recall": "recall",
+        }
+
+        grid_search = GridSearchCV(
+            model,
+            param_grids[name],
+            cv=5,
+            scoring=scoring,
+            refit="recall",
+            return_train_score=True,
+            n_jobs=-1,
+        )
         grid_search.fit(X_train, y_train)
         
         # Guardamos TODO: el mejor score, los parámetros y TODOS los resultados del grid
         results_detail[name] = {
-            'best_score': grid_search.best_score_,
-            'best_params': grid_search.best_params_,
-            'all_scores': grid_search.cv_results_['mean_test_score'],
-            'all_params': grid_search.cv_results_['params']
+            "best_accuracy": grid_search.cv_results_["mean_test_accuracy"][grid_search.best_index_],
+            "best_recall": grid_search.cv_results_["mean_test_recall"][grid_search.best_index_],
+            "best_params": grid_search.best_params_,
+
+            "mean_train_accuracy": grid_search.cv_results_["mean_train_accuracy"],
+            "mean_val_accuracy": grid_search.cv_results_["mean_test_accuracy"],
+
+            "mean_train_recall": grid_search.cv_results_["mean_train_recall"],
+            "mean_val_recall": grid_search.cv_results_["mean_test_recall"],
+
+            "all_params": grid_search.cv_results_["params"],
         }
         print(f"✅ {name} procesado.")
 
