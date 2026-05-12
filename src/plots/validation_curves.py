@@ -75,9 +75,9 @@ def plot_validation_curves(results):
         plt.xlabel(param)
         plt.ylabel("Score")
 
-        plt.title(f"{model_name} Validation Curve")
+        plt.title(f"Curva de Validación de {model_name}")
 
-        plt.ylim(0, 1.05)
+        plt.ylim(0.8, 1.05)
 
         plt.legend()
 

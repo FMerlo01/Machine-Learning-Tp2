@@ -12,7 +12,6 @@ from plots.model_comparison import (
     plot_best_with_params,
     plot_all_combinations,
 )
-
 from plots.validation_curves import (
     plot_validation_curves,
 )
@@ -28,6 +27,7 @@ def main():
     plot_best_with_params(dict_results)
     plot_all_combinations(dict_results)
     plot_validation_curves(dict_results)
+    print("Fotos guardadas en results/")
 
 if __name__ == "__main__":
     main()

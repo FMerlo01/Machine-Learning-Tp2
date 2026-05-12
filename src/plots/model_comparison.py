@@ -28,7 +28,7 @@ def plot_best_with_params(results):
     plt.figure(figsize=(10, 6))
     sns.barplot(x="Accuracy", y="Modelo", data=df_acc)
 
-    plt.title("Best Validation Accuracy by Model")
+    plt.title("Mejor Accuracy en Validación por Modelo")
     plt.xlim(0, 1)
     plt.tight_layout()
 
@@ -41,7 +41,7 @@ def plot_best_with_params(results):
     plt.figure(figsize=(10, 6))
     sns.barplot(x="Recall", y="Modelo", data=df_rec)
 
-    plt.title("Best Validation Recall by Model")
+    plt.title("Mejor Recall en Validación por Modelo")
     plt.xlim(0, 1)
     plt.tight_layout()
 
@@ -84,8 +84,8 @@ def plot_all_combinations(results):
         legend=False,
     )
 
-    plt.title("Validation Accuracy for All Hyperparameter Combinations")
-    plt.ylim(0, 1)
+    plt.title("Accuracy en Validación para todas las combinaciones de hiperparámetros")
+    plt.ylim(0.8, 1)
     plt.xticks(rotation=30)
     plt.tight_layout()
 
@@ -103,8 +103,8 @@ def plot_all_combinations(results):
         legend=False,
     )
 
-    plt.title("Validation Recall for All Hyperparameter Combinations")
-    plt.ylim(0, 1)
+    plt.title("Recall en Validación para todas las combinaciones de hiperparámetros")
+    plt.ylim(0.8, 1)
     plt.xticks(rotation=30)
     plt.tight_layout()
 
