@@ -43,7 +43,9 @@ def _plot_heatmap(df, param_x, param_y, metric_col, out_path, title):
 
 def plot_rf_2d_heatmaps():
     plot_dir = os.path.join(RESULTS_BASE_2D, MODEL_SLUG, "plots")
+    accuracy_dir = os.path.join(plot_dir, "accuracy")
     os.makedirs(plot_dir, exist_ok=True)
+    os.makedirs(accuracy_dir, exist_ok=True)
 
     pairs = {
         "max_depth_vs_max_features": ("param_max_depth", "param_max_features"),
@@ -62,11 +64,11 @@ def plot_rf_2d_heatmaps():
             continue
 
         train_out = os.path.join(
-            plot_dir,
+            accuracy_dir,
             f"rf_heatmap_train_accuracy_{param_x.replace('param_', '')}_vs_{param_y.replace('param_', '')}.png",
         )
         val_out = os.path.join(
-            plot_dir,
+            accuracy_dir,
             f"rf_heatmap_val_accuracy_{param_x.replace('param_', '')}_vs_{param_y.replace('param_', '')}.png",
         )
 
@@ -85,6 +87,32 @@ def plot_rf_2d_heatmaps():
             "mean_val_accuracy",
             val_out,
             f"RF Validation Accuracy\n{param_y.replace('param_', '')} vs {param_x.replace('param_', '')}",
+        )
+
+        train_recall_out = os.path.join(
+            plot_dir,
+            f"rf_heatmap_train_recall_{param_x.replace('param_', '')}_vs_{param_y.replace('param_', '')}.png",
+        )
+        val_recall_out = os.path.join(
+            plot_dir,
+            f"rf_heatmap_val_recall_{param_x.replace('param_', '')}_vs_{param_y.replace('param_', '')}.png",
+        )
+
+        _plot_heatmap(
+            df,
+            param_x,
+            param_y,
+            "mean_train_recall",
+            train_recall_out,
+            f"RF Train Recall\n{param_y.replace('param_', '')} vs {param_x.replace('param_', '')}",
+        )
+        _plot_heatmap(
+            df,
+            param_x,
+            param_y,
+            "mean_val_recall",
+            val_recall_out,
+            f"RF Validation Recall\n{param_y.replace('param_', '')} vs {param_x.replace('param_', '')}",
         )
 
 

@@ -61,7 +61,7 @@ def run_rf_exp3():
     }
 
     param_grid = {
-        "max_depth": [6, 7],
+        "max_depth": [7],
         "max_features": [0.7],
         "min_samples_leaf": [2],
         "min_samples_split": [4],
@@ -73,14 +73,14 @@ def run_rf_exp3():
         param_grid,
         cv=5,
         scoring=scoring,
-        refit="accuracy",
+        refit="recall",
         return_train_score=True,
         n_jobs=-1,
     )
     grid_search.fit(X_train, y_train)
 
-    _save_cv_results_csv(grid_search, suffix="max_depth_6_7_fixed")
-    print("✅ RF exp3 procesado: max_depth 6/7 con parametros fijos.")
+    _save_cv_results_csv(grid_search, suffix="best_combo")
+    print("✅ RF exp3 procesado: mejor combinacion de hiperparametros.")
 
 
 if __name__ == "__main__":

@@ -93,7 +93,7 @@ def run_rf_2d_experiments():
             pair_grid,
             cv=5,
             scoring=scoring,
-            refit="accuracy",
+            refit="recall",
             return_train_score=True,
             n_jobs=-1,
         )
