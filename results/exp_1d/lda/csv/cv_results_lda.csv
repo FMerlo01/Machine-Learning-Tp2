@@ -1,0 +1,2 @@
+model,mean_train_accuracy,mean_val_accuracy,mean_train_recall,mean_val_recall
+LDA,0.9604395604395604,0.9472527472527474,0.8941176470588236,0.8588235294117647

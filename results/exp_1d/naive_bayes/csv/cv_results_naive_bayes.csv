@@ -1,0 +1,2 @@
+model,mean_train_accuracy,mean_val_accuracy,mean_train_recall,mean_val_recall
+Naive-Bayes,0.9571428571428571,0.9494505494505494,0.9161764705882354,0.9058823529411765
