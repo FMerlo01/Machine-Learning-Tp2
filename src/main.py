@@ -15,9 +15,10 @@ from plots.model_comparison import (
 from plots.validation_curves import (
     plot_validation_curves,
 )
+from models.final_evaluation import final_evaluation
 
 def main():
-    print("=== Pipeline de Machine Learning - TP2 ===")
+    print("=== Pipeline de Machine Learning - TP2 ===\n")
     #plot_correlation_matrix()
 
     # 2. Entrenar y obtener resultados
@@ -28,6 +29,9 @@ def main():
     plot_all_combinations(dict_results)
     plot_validation_curves(dict_results)
     print("Fotos guardadas en results/")
+
+    # 4. Evaluación final sobre test con el mejor modelo
+    final_evaluation()
 
 if __name__ == "__main__":
     main()
