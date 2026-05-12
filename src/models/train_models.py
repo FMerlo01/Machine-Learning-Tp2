@@ -1,3 +1,4 @@
+import os
 import pandas as pd
 from sklearn.model_selection import GridSearchCV
 from sklearn.naive_bayes import GaussianNB
@@ -7,6 +8,41 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.ensemble import RandomForestClassifier
 
 TRAIN_TRANSFORMED_PATH = "data/processed/train_transformed.csv"
+RESULTS_DIR = "results"
+
+
+def _model_slug(name):
+    return name.lower().replace(" ", "_").replace("-", "_")
+
+
+def _save_cv_results_csv(model_name, grid_search):
+    os.makedirs(RESULTS_DIR, exist_ok=True)
+
+    cv_df = pd.DataFrame(grid_search.cv_results_)
+
+    metric_cols = [
+        "mean_train_accuracy",
+        "mean_test_accuracy",
+        "mean_train_recall",
+        "mean_test_recall",
+    ]
+
+    param_cols = [col for col in cv_df.columns if col.startswith("param_")]
+
+    out_df = cv_df[metric_cols + param_cols].copy()
+    out_df = out_df.rename(
+        columns={
+            "mean_test_accuracy": "mean_val_accuracy",
+            "mean_test_recall": "mean_val_recall",
+        }
+    )
+    out_df.insert(0, "model", model_name)
+
+    out_path = os.path.join(
+        RESULTS_DIR,
+        f"cv_results_{_model_slug(model_name)}.csv",
+    )
+    out_df.to_csv(out_path, index=False)
 
 def run_training():
     print("=== ENTRENAMIENTO Y EVALUACIÓN DE MODELOS (CV) ===")
@@ -30,16 +66,19 @@ def run_training():
         "Naive-Bayes": {}, # NB no tiene hiperparámetros críticos para ajustar acá
         "LDA": {},         # Idem LDA
         "SVM": {
-            'C': [0.1, 0.5, 1, 10], 
-            'kernel': ['linear', 'rbf']
+            "C": [0.05, 0.1, 0.25, 0.5, 0.75, 1, 2.5, 5, 7.5, 10, 15, 20],
+            "kernel": ["linear", "rbf"],
         },
         "KNN": {
-            'n_neighbors': [3, 5, 7, 11, 20], 
-            'weights': ['uniform', 'distance']
+            "n_neighbors": [1, 3, 5, 7, 9, 11, 13, 15, 17, 20, 25, 30],
+            "weights": ["uniform", "distance"],
+            "p": [1, 2],
         },
         "Random Forest": {
-            'n_estimators': [50, 100, 200, 300], 
-            'max_depth': [None, 5, 10, 15]
+            "n_estimators": [50, 75, 100, 125, 150, 175, 200, 225, 250, 275, 300],
+            "max_depth": [None, 3, 5, 7, 9, 11, 15, 20],
+            "min_samples_split": [2, 3, 5, 7, 10],
+            "min_samples_leaf": [1, 2, 3, 4, 5],
         }
     }
     
@@ -61,6 +100,8 @@ def run_training():
             n_jobs=-1,
         )
         grid_search.fit(X_train, y_train)
+
+        _save_cv_results_csv(name, grid_search)
         
         # Guardamos TODO: el mejor score, los parámetros y TODOS los resultados del grid
         results_detail[name] = {
