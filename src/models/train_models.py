@@ -107,6 +107,7 @@ def run_training():
         results_detail[name] = {
             "best_accuracy": grid_search.cv_results_["mean_test_accuracy"][grid_search.best_index_],
             "best_recall": grid_search.cv_results_["mean_test_recall"][grid_search.best_index_],
+            "best_train_recall": grid_search.cv_results_["mean_train_recall"][grid_search.best_index_],
             "best_params": grid_search.best_params_,
 
             "mean_train_accuracy": grid_search.cv_results_["mean_train_accuracy"],

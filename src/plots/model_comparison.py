@@ -20,6 +20,7 @@ def plot_best_with_params(results):
             "Modelo": name,
             "Accuracy": info["best_accuracy"],
             "Recall": info["best_recall"],
+            "Train Recall": info["best_train_recall"],
             "Params": params_str,
         })
 
